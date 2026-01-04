@@ -1,0 +1,19 @@
+id: POD_RUN_AS_ROOT
+resource: pod
+severity: HIGH
+
+title: Pod running as root user
+
+description: >
+  The container in this pod is running as the root user.
+  This increases the blast radius if the container is compromised.
+
+root_cause: >
+  securityContext.runAsNonRoot is not set or explicitly disabled.
+
+mitigation: >
+  Set securityContext.runAsNonRoot to true and specify a non-root user.
+
+condition:
+  path: spec.containers[*].securityContext.runAsNonRoot
+  equals: false

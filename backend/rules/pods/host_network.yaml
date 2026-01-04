@@ -1,0 +1,18 @@
+id: POD_HOST_NETWORK
+resource: pod
+severity: CRITICAL
+
+title: Pod uses host network
+
+description: >
+  The pod is configured to use the host network namespace.
+
+root_cause: >
+  spec.hostNetwork is set to true.
+
+mitigation: >
+  Avoid using hostNetwork unless absolutely required.
+
+condition:
+  path: spec.hostNetwork
+  equals: true

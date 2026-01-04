@@ -22,6 +22,13 @@ GET /	Health check
 GET /k8s/namespaces	List namespaces
 GET /k8s/deployments	List deployments
 GET /k8s/pods	List pods
+
+Step 1: Scan pods into DB
+POST /pods/scan/{cluster_id}
+
+Step 2: Run detection
+POST /detect/pods/{cluster_id}
+
 ```
 
 ```
