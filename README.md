@@ -17,8 +17,26 @@ docker run -d \
   -p 5432:5432 postgres:18
 
 
-
+```
 GET /	Health check
 GET /k8s/namespaces	List namespaces
 GET /k8s/deployments	List deployments
 GET /k8s/pods	List pods
+```
+
+```
+Kubernetes
+ ↓
+Collection
+ ↓
+Normalization
+ ↓
+Storage
+ ↓
+Detection
+ ↓
+Scoring
+ ↓
+Presentation
+
+```
