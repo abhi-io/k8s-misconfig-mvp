@@ -1,0 +1,144 @@
+import React, { useEffect } from "react";
+import {
+  Box,
+  Avatar,
+  Typography,
+  Grid,
+  Paper,
+  Tooltip,
+  IconButton,
+  Button,
+  useTheme,
+  useMediaQuery
+} from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
+import MessageIcon from '@mui/icons-material/Message';
+import HomeIcon from '@mui/icons-material/Home';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import PlateformSetting from "./PlateformSetting";
+import ProfileInformation from "./ProfileInformation";
+import Conversations from "./Conversations";
+
+const Profile = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const coverStyle = {
+    width: "100%",
+    height: isSmallScreen ? 240 : 300,
+    objectFit: "cover",
+    borderRadius: 20,
+    boxShadow: 3,
+  };
+
+  useEffect(() => {
+    document.title = "Admin / Profile"
+  }, []);
+
+  return (
+    <Box p={isSmallScreen ? 0 : 3} sx={{ backgroundColor: theme.palette.background.default }}>
+      {/* Cover Image */}
+      <Box position="relative">
+        <img
+          src="https://images.unsplash.com/photo-1554135717-157a963b6e14?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="profile cover"
+          style={coverStyle}
+        />
+
+        {/* Profile Header - slightly overlapped below cover */}
+        <Box
+          mt={-8}
+          position="relative"
+          sx={{
+            width: "95%",
+            mx: "auto",
+          }}
+        >
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              borderRadius: 4,
+              background: theme.palette.background.paper,
+              boxShadow: 4
+            }}
+          >
+            {/* Header Grid */}
+            <Grid container spacing={3} alignItems="center" flexWrap="wrap">
+              {/* Avatar + Name */}
+              <Grid item display="flex" flexGrow={1}>
+                <Avatar
+                  src="/developerImg.png"
+                  alt="Profile"
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    '& img': {
+                      objectFit: 'cover'
+                    }
+                  }}
+                />
+                <Box ml={2}>
+                  <Typography variant="h5" fontWeight={600}>Behan Kumar</Typography>
+                  <Typography variant="subtitle1" color="text.secondary">Full-Stack Developer</Typography>
+                  <Tooltip title="Edit Profile">
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Typography variant="label">Edit</Typography>
+                      <IconButton>
+                        <EditNoteIcon />
+                      </IconButton>
+                    </Box>
+                  </Tooltip>
+                </Box>
+              </Grid>
+
+              {/* Action Buttons */}
+              <Grid item xs display="flex" gap={2} justifyContent="flex-end">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{
+                    bgcolor: theme.palette.background.default,
+                    color: theme.palette.text.primary,
+                  }}
+                  startIcon={<HomeIcon />}
+                >
+                  App
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    bgcolor: theme.palette.background.default,
+                    color: theme.palette.text.primary,
+                  }}
+                  color="primary"
+                  startIcon={<MessageIcon />}>
+                  Message
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    bgcolor: theme.palette.background.default,
+                    color: theme.palette.text.primary,
+                  }}
+                  color="primary"
+                  startIcon={<SettingsIcon />}>
+                  Settings
+                </Button>
+              </Grid>
+            </Grid>
+
+            {/* Three-Column Info Section */}
+            <Box display="grid" gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"} gap={3} mt={3} flexWrap={"wrap"}>
+              <PlateformSetting />
+              <ProfileInformation />
+              <Conversations />
+            </Box>
+          </Paper>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default Profile;
